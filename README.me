@@ -1,0 +1,34 @@
+PDF Chatbot — project overview
+
+This project is a small Laravel application that provides a focused PDF-questioning assistant. It accepts an uploaded PDF, extracts its text, and uses the Google Generative Language API (Gemini) to generate answers that are strictly sourced from the provided PDF content.
+
+Core behavior
+
+- Ingest: a user-uploaded PDF is processed and its text is extracted for use as the knowledge source.
+- Contextual prompting: the extracted PDF text is combined with the user's question to form a single prompt sent to Gemini.
+- Source-restricted answers: the application is designed to answer only from the PDF content. If the requested information does not appear in the PDF, the assistant returns the explicit message: "I could not find that in the uploaded PDF." This behavior is enforced by the prompt construction in `app/Services/GeminiService.php`.
+- Short timeouts and conservative temperature: the request uses a modest timeout and low sampling temperature to favor concise, deterministic answers.
+
+Main components
+
+- `app/Livewire/PdfChatbot.php` — Livewire component orchestrating file uploads, text extraction, and user interactions.
+- `app/Services/GeminiService.php` — builds the prompt and posts to the Gemini Generative Language endpoint, returning the model's text candidate.
+- `resources/views/chatbot.blade.php` — simple UI for uploading PDFs, asking questions, and showing model responses.
+- `routes/web.php` — serves the chatbot UI at the application root.
+
+Design notes and constraints
+
+- The assistant intentionally restricts answers to the uploaded PDF; it will not attempt to answer from external knowledge.
+- Prompt size: very large PDFs can produce long prompts; in such cases the prompt may be truncated or the request may time out.
+- Security: API credentials (Gemini key) are read from configuration and must be kept private.
+
+Typical usage flow (functional description)
+
+1. User uploads a PDF via the web UI.
+2. The app extracts text from the PDF and stores it temporarily for the session.
+3. The user asks a question about the PDF's content.
+4. The app constructs a prompt that includes the PDF text and the question, sends it to Gemini, and returns Gemini's reply to the user.
+
+Intended purpose
+
+This project demonstrates a pattern for building a document-grounded conversational assistant: realistic extraction of document text, construction of a source-restricting prompt, and integration with a modern generative model to answer questions constrained to that document.
