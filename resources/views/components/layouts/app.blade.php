@@ -23,10 +23,27 @@
             box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.2), 0 0 24px rgba(56, 189, 248, 0.15);
         }
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-12DX4VCWWE"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-12DX4VCWWE');
+    </script>
     @livewireStyles
 </head>
-<body class="neon-grid min-h-screen bg-slate-950 text-slate-100">
-    {{ $slot }}
+</head>
+<body class="neon-grid min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <main class="flex-1">
+        {{ $slot }}
+    </main>
+
+    <footer class="w-full text-center py-2 text-sm text-slate-400">
+        © {{ date('Y') }} | <a href="https://navneetcodes.com" class="underline hover:text-slate-200">Navneet Codes</a>
+    </footer>
 
     @livewireScripts
 </body>

@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <div class="mx-auto w-full max-w-6xl px-4 py-10 md:py-14">
+    <div class="mx-auto w-full max-w-6xl px-4 py-10 md:py-6">
         <div class="glass-panel rounded-2xl p-6 md:p-8">
             {{-- <p class="text-xs uppercase tracking-[0.22em] text-cyan-300 hidden">Gemini 2.5 Flash</p> --}}
             <h1 class="mt-2 text-3xl font-bold md:text-5xl">
