@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'PDF Chatbot') }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .neon-grid {
